@@ -59,7 +59,8 @@ const getUserInput = async () => await inquirer.prompt([
     type: 'input',
     message: 'Enter your LinkedIn URL: ',
     name: 'linkedInUrl',
-    validate: (input) => new Promise((resolve, reject) => input.includes('linkedin.com/in') ? resolve(true) : reject('Please enter a valid github profile url')),
+    validate: async (input) => await new Promise((resolve, reject) => input.includes('linkedin.com/in') ? resolve(true) : reject('Please enter a valid github profile url')),
+    filter: (input) => !input.startsWith('https://') ? input = `https://${input}` : input
   },
 ]);
 
